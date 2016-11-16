@@ -14,7 +14,7 @@ class ColoredText extends HTMLElement {
 		this.color = new ReactiveVar(new ReactiveColor)
 		this.view = Blaze.renderWithData(
 			Template.ColoredText,             // render this template
-			this.color,                       // with this.color as data context
+			() => this.color.get(),           // with the ReactiveColor as data context
 			this.attachShadow({mode: 'open'}) // into the the shadow root
 		)
 	}
