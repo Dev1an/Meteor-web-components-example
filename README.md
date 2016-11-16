@@ -1,7 +1,7 @@
 # Meteor & Web Components example
 Example of using web components in a meteor project with blaze and the babel transpiler.
 
-[Colored text component](https://dev1an.github.io/Meteor-web-components-example/)
+[Take a look at the running web app](https://dev1an.github.io/Meteor-web-components-example/)
 
 ## How to run the example
 
