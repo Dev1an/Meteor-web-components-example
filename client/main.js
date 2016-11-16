@@ -5,9 +5,16 @@ import 'document-register-element'
 import '/imports/ColoredText'
 import '/imports/ColorPicker'
 
-Template.body.onRendered(function() {
-	const picker = document.querySelector('color-picker')
-	const text = document.querySelector('colored-text')
+Template.body.onCreated(function() {
+	this.color = new ReactiveVar({red: 0, green: 0, blue: 0})
+})
 
-	text.color.set( picker.color.get() )
+Template.body.events({
+	'change [type=color]'(event, template) {
+		template.color.set(event.currentTarget.color)
+	}
+})
+
+Template.body.helpers({
+	color() {return Template.instance().color.get()}
 })

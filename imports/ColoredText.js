@@ -1,29 +1,15 @@
-import './ColoredText.html'
-
-export class ReactiveColor {
-	constructor() {
-		this.red   = new ReactiveVar(200)
-		this.green = new ReactiveVar(200)
-		this.blue  = new ReactiveVar(0)
-	}
-}
-
 class ColoredText extends HTMLElement {
 	constructor() {
 		super()
-		this.color = new ReactiveVar(new ReactiveColor)
-		this.view = Blaze.renderWithData(
-			Template.ColoredText,             // render this template
-			() => this.color.get(),           // with the ReactiveColor as data context
-			this.attachShadow({mode: 'open'}) // into the the shadow root
-		)
+		this.color = {red: 0, green: 0, blue: 0}
 	}
 
-	disconnectedCallback() {
-		// Remove the Blaze View in such a way that any
-		// behaviors attached to the DOM by Meteor are cleaned up.
-		Blaze.remove(this.view)
+	attributeChangedCallback(name, oldValue, newValue) {
+		this.color[name] = newValue || 0
+		this.style.color = `rgb(${this.color.red}, ${this.color.green}, ${this.color.blue})`
 	}
+
+	static get observedAttributes() { return ["red", "green", "blue"]; }
 }
 
 customElements.define("colored-text", ColoredText);
