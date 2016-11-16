@@ -10,7 +10,7 @@ Template.body.onCreated(function() {
 })
 
 Template.body.events({
-	'change [type=color]'(event, template) {
+	'change [is=color-picker]'(event, template) {
 		template.color.set(event.currentTarget.color)
 	}
 })
